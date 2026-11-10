@@ -22,7 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private static final String APP_URL = "https://minigame-tech.github.io/";
+    private static final String APP_URL = "https://mini-game-tech.github.io/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
