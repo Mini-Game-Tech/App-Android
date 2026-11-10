@@ -45,7 +45,7 @@ Whether you're dodging traffic in Frogger, clearing aliens in Space Invaders, or
 
 Puoi giocare ai minigames direttamente attraverso la piattaforma web:
 
-🔗 **[https://mini-game-tech.github.io/](https://cipriano-salvatore.github.io/minigame-tech/)**
+🔗 **[https://mini-game-tech.github.io/](https://cipriano-salvatore.github.io/mini-game-tech/)**
 
 **Stato Servizi:** Il sito GitHub Pages è attivamente mantenuto e il badge sopra riflette lo stato attuale. Se il collegamento non dovesse funzionare, apri un issue sul repository.
 
