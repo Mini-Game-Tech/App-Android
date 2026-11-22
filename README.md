@@ -1,6 +1,6 @@
 # 🕹️ Minigame Tech
 
-> Una piattaforma web cross-platform per arcade classici, ospitata su GitHub Pages e confezionata in un'app Android tramite WebView.
+> A cross-platform web platform for classic arcades, hosted on GitHub Pages and packaged in an Android app via WebView.
 
 [![GitHub Pages](https://img.shields.io/badge/status-live-success.svg)](https://cipriano-salvatore.github.io/minigame-tech/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -11,117 +11,117 @@
 
 ## 📖 About The Project
 
-**Minigame Tech** è un progetto open-source dedicato alla ricreazione di leggendari giochi arcade retrò. La piattaforma unisce:
+**Minigame Tech** is an open-source project dedicated to recreating legendary retro arcade games. The platform combines:
 
-- **Logic di gioco** scritta in Python (con `g2d`, Pygame) e C#
-- **Interfaccia frontend** in HTML5/CSS3 moderna e responsiva
-- **Wrapper Android** che incapsula il sito web in un WebView per la distribuzione su Google Play Store
+- **Game logic** written in Python (with 'g2d', Pygame) and C#
+- **Frontend interface** in modern and responsive HTML5/CSS3
+- **Android wrapper** that encapsulates the website in a WebView for distribution on the Google Play Store
 
-Whether you're dodging traffic in Frogger, clearing aliens in Space Invaders, or navigating mazes in Pac-Man, Minigame Tech consegna un'esperienza nostalgica ottimizzata sia per desktop che per schermi touch mobile.
+Whether you're dodging traffic in Frogger, clearing aliens in Space Invaders, or navigating mazes in Pac-Man, Minigame Tech delivers a nostalgic experience optimized for both desktop and mobile touch screens.
 
 ---
 
 ## 🎮 Features
 
-- **Classic Arcade Remakes:** Meccaniche fedelmente ricreate di titoli senza tempo.
-- **Cross-Platform Play:** Design fully responsive ottimizzato per browser desktop e touchscreen mobili.
-- **Android App Support:** Pubblicato su Google Play Store come applicazione WebView-wrapper per una distribuzione mobile senza friction.
-- **Zero-Dependency Web Core:** Il cuore web è costruito con script core efficienti e standard web moderni per tempi di caricaggio rapidi.
+- **Classic Arcade Remakes:** Faithfully recreated mechanics of timeless titles.
+- **Cross-Platform Play:** Fully responsive design optimized for desktop browsers and mobile touchscreens.
+- **Android App Support:** Published on the Google Play Store as a WebView-wrapper application for friction-free mobile deployment.
+- **Zero-Dependency Web Core:** The web heart is built with efficient core scripts and modern web standards for fast loading times.
 
-> **Nota:** L'app Android funge da contenitore WebView per la piattaforma web. Le funzionalità native sono attualmente limitate a modalità fullscreen e pull-to-refresh offline.
+> **Note:** The Android app acts as a WebView container for the web platform. Native features are currently limited to fullscreen and offline pull-to-refresh modes.
 
 ---
 
 ## 🚀 Built With
 
-- **Core Logic & Game Loops:** Python (`g2d`, Pygame) / C#
+- **Basic Logic and Game Cycles:** Python ('g2d', Pygame) / C#
 - **Frontend:** HTML5, CSS3, Responsive Design
-- **Hosting & CI/CD:** GitHub Pages
-- **Mobile Wrapper:** Android Studio (Java, WebView API)
+- **Hosting and CI/CD:** GitHub Pages
+- **Mobile wrapper:** Android Studio (Java, WebView API)
 
 ---
 
 ## 🌐 Live Demo & Access
 
-Puoi giocare ai minigames direttamente attraverso la piattaforma web:
+You can play minigames directly through the web platform:
 
 🔗 **[https://mini-game-tech.github.io/](https://cipriano-salvatore.github.io/mini-game-tech/)**
 
-**Stato Servizi:** Il sito GitHub Pages è attivamente mantenuto e il badge sopra riflette lo stato attuale. Se il collegamento non dovesse funzionare, apri un issue sul repository.
+**Service Status:** The GitHub Pages site is actively maintained and the badge above reflects its current status. If the link doesn't work, open an issue on the repository.
 
 ---
 
 ## 📱 Android Application
 
-Minigame Tech è disponibile anche come applicazione Android, che porta l'esperienza completa arcade retrò su smartphone con layout touch ottimizzati e modalità fullscreen immersiva.
+Minigame Tech is also available as an Android application, bringing the full retro arcade experience to smartphones with optimized touch layouts and immersive fullscreen mode.
 
-**Importante:** L'app è un wrapper WebView attorno alla piattaforma web. Non contiene codice gioco nativo: tutti i giochi vengono eseguiti all'interno della WebView caricando `https://minigame-tech.github.io/`.
+**Important:** The app is a WebView wrapper around the web platform. Contains no native game code: all games run inside the WebView by loading 'https://minigame-tech.github.io/`.
 
-**Permessi richiesti:**
-- `INTERNET`: Per il caricamento della pagina web.
-- `ACCESS_NETWORK_STATE`: Per rilevare la connessione e mostrare la pagina offline appropriata.
+**Required permits:**
+- 'INTERNET': For loading the web page.
+- 'ACCESS_NETWORK_STATE': To detect the connection and display the appropriate offline page.
 
-La sicurezza della rete è gestita tramite `network_security_config`, che impone HTTPS per il dominio `minigame-tech.github.io` e blocca il traffico in chiaro.
+Network security is managed via 'network_security_config', which enforces HTTPS for the 'minigame-tech.github.io' domain and blocks clear-text traffic.
 
 ---
 
 ## 🛠️ Local Development & Setup
 
-Per eseguire o modificare il progetto localmente:
+To run or modify the project locally:
 
 1. **Clone the repository:**
-   ```bash
+   "'bash
    git clone https://github.com/cipriano-salvatore/minigame-tech.git
-   ```
+   "'
 
 2. **Navigate to the project directory:**
-   ```bash
-   cd minigame-tech
-   ```
+   "'bash
+   minigame-tech CD
+   "'
 
-3. **Open and test:** Open `index.html` in your preferred browser or serve it via a local development server (e.g., Python's HTTP server):
-   ```bash
+3. **Open and test:** Open 'index.html' in your preferred browser or serves it via a local development server (e.g., Python's HTTP server):
+   "'bash
    python3 -m http.server 8000
-   ```
+   "'
 
-Per testare l'app Android:
-- Apri il progetto in Android Studio.
-- Assicurati di avere una versione recente del JDK (Java 17+ consigliato).
-- Esegui su un dispositivo o emulator con API level 24+.
+To test the Android app:
+- Open the project in Android Studio.
+- Make sure you have a recent version of the JDK (Java 17+ recommended).
+- Run on a device or emulator with API level 24+.
 
 ---
 
-## 🔒 Sicurezza & Privacy
+## 🔒 Security & Privacy
 
-- **Network Security:** L'app impone HTTPS per tutti i caricamenti web. Il traffico in chiaro (HTTP) è bloccato a livello di configurazione Android.
-- **Dati locali:** Non vengono memorizzati dati sensibili localmente. L'accesso ai file locali sulla device è disabilitato nella WebView per motivi di sicurezza.
-- **Privacy:** Non sono presenti tracker o analytics di terze parti nell'app Android. La pagina web potrebbe avere la propria policy sulla privacy.
+- **Network Security:** The app imposes HTTPS for all web uploads. Free-to-air traffic (HTTP) is blocked at the Android configuration level.
+- **Local Data:** No sensitive data is stored locally. Access to local files on the device is disabled in the WebView for security reasons.
+- **Privacy:** There are no third-party trackers or analytics in the Android app. The web page may have its own privacy policy.
 
 ---
 
 ## 🤝 Contributing
 
-Contributi, segnalazioni di problemi e richieste di funzionalità sono benvenute! Sentiti libero di controllare la [pagina degli issues](https://github.com/cipriano-salvatore/minigame-tech/issues).
+Contributions, problem reports, and feature requests are welcome! Feel free to check out the [issues page](https://github.com/cipriano-salvatore/minigame-tech/issues).
 
 1. Fork the Project
-2. Crea il tuo ramo di funzionalità (`git checkout -b feature/AmazingFeature`)
-3. Commit dei tuoi cambiamenti (`git commit -m 'Add some AmazingFeature'`)
-4. Push sul ramo (`git push origin feature/AmazingFeature`)
-5. Apri una Pull Request
+2. Create your feature branch ('git checkout -b feature/AmazingFeature')
+3. Commit your changes ('git commit -m 'Add some AmazingFeature")
+4. Push to branch ('git push origin feature/AmazingFeature')
+5. Open a Pull Request
 
 ---
 
 ## 📄 License
 
-Distribuito sotto la licenza MIT. Vedi [LICENSE](https://github.com/cipriano-salvatore/minigame-tech/blob/main/LICENSE.md) per maggiori informazioni.
+Distributed under the MIT License. See [LICENSE](https://github.com/cipriano-salvatore/minigame-tech/blob/main/LICENSE.md) for more information.
 
 ---
 
-## 🛠️ Stack Tecnico Interno (Developer Notes)
+## 🛠️ Internal Technical Stack (Developer Notes)
 
-> Queste informazioni sono per i contributori tecnici.
+> This information is for technical contributors.
 
-- **Web Core:** Sito statico generato con HTML/CSS/JS puro, ospitato su GitHub Pages.
-- **Android App:** Modulo `app/` su Android Studio, minimum SDK 24, target SDK 37.
-- **Build System:** Gradle con Java 17 (compatibile con compileSdk 37).
-- **Risorse aggiunte:** `res/xml/network_security_config.xml` per la sicurezza di rete configurata.
+- **Web Core:** Static site generated with pure HTML/CSS/JS, hosted on GitHub Pages.
+- **Android App:** 'app/' module on Android Studio, minimum SDK 24, target SDK 37.
+- **Build System:** Gradle with Java 17 (compatible with compileSdk 37).
+- **Resources added:** 'res/xml/network_security_config.xml' for configured network security.
