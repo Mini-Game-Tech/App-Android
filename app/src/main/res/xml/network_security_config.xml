@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Impone HTTPS per tutti i domini e blocca il traffico in chiaro -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">minigame-tech.github.io</domain>
+    </domain-config>
+
+    <!-- Impedisce il caricamento di risorse via HTTP (blocco traffico in chiaro) -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
