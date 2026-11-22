@@ -42,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
         // Configurazione avanzata delle impostazioni della WebView
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setDomStorageEnabled(true); // Necessario per il tema e le preferenze
-        webSettings.setDatabaseEnabled(true);
-        webSettings.setAllowFileAccess(false); // Solo contenuti remoti
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setAllowFileAccess(false);
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        // Gestione opzionale errori JavaScript per i giochi
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(false);
 
         // Configurazione del Pull-to-Refresh intelligente
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -62,7 +63,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     showOfflineErrorPage();
-                    swipeRefreshLayout.setRefreshing(false);
+                    // Piccolo delay per dare all'utente tempo visivo di vedere il tentativo di ricarica offline
+                    new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
+                    }, 1500); // 1.5 secondi per mostrare lo stato di refresh offline
                 }
             }
         });
@@ -76,10 +83,23 @@ public class MainActivity extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request){
                 String url = request.getUrl().toString();
 
-                // Se il URL appartiene al dominio principale, caricalo nella WebView
-                if (url.startsWith("https://" + APP_DOMAIN) || url.startsWith("http://" + APP_DOMAIN)) {
-                    view.loadUrl(url);
-                    return true;
+                // Estrae il host dal URL per un confronto più robusto
+                java.net.URL parsedUrl;
+                try {
+                    parsedUrl = new java.net.URL(url);
+                    String host = parsedUrl.getHost();
+                    
+                    // Verifica se l'host corrisponde al dominio principale o ai suoi sotto-domini (inclusi www)
+                    boolean isAppDomain = host.equals(APP_DOMAIN) || 
+                                         host.startsWith("www." + APP_DOMAIN) || 
+                                         host.endsWith("." + APP_DOMAIN);
+                    
+                    if (isAppDomain) {
+                        view.loadUrl(url);
+                        return true;
+                    }
+                } catch (java.net.MalformedURLException e) {
+                    // Se il URL non è valido, apri nel browser di sistema
                 }
 
                 // Per tutti gli altri URL, apri nel browser di sistema (comportamento standard)
@@ -90,12 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
 
-            // Compatibilità per vecchie e nuove versioni di Android sugli errori di rete
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                showOfflineErrorPage();
-            }
-
+            // Gestione errori WebView (versione moderna per Android 24+)
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 if (request.isForMainFrame()) {
@@ -112,10 +127,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Carico la piattaforma web verificando prima la connessione
-        if (savedInstanceState == null){
-            loadAppContent();
-        }
+        // Carico il contenuto dell'applicazione (sempre, per gestire correttamente la rotazione)
+        loadAppContent();
 
         // 3. GESTIONE AGGIORNATA DEL TASTO INDIETRO
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -233,6 +246,28 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        // Rendere il fullscreen più persistente: richiama hideSystemUI dopo un breve delay
+        // se l'utente tenta di richiamare la barra di navigazione
+        final View finalDecorView = decorView;
+        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) != 0) {
+                    // Sistema UI nascosto, nulla da fare
+                    return;
+                }
+                // Sistema UI richiamato dall'utente, nascondilo di nuovo dopo un breve delay
+                finalDecorView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Verifica che l'UI sia ancora richiamata prima di nasconderla di nuovo
+                        if ((finalDecorView.getSystemUiVisibility() & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                            hideSystemUI();
+                        }
+                    }
+                }, 1500); // Ri-nascondi dopo 1.5 secondi
+            }
+        });
     }
 
     @Override
